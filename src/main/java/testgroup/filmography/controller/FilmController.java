@@ -1,10 +1,8 @@
 package testgroup.filmography.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import testgroup.filmography.model.Film;
 import testgroup.filmography.service.FilmService;
@@ -14,7 +12,13 @@ import java.util.List;
 
 @Controller
 public class FilmController {
-    private final FilmService filmService = new FilmServiceImpl();
+
+    private FilmService filmService;
+
+    @Autowired
+    public void setFilmService(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allFilms() {
